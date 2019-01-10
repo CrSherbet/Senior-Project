@@ -35,6 +35,7 @@ public class OptionsScript : MonoBehaviour {
 
   public void RegionChange (Dropdown selectedRegion){
     Controller.options.region = selectedRegion.value;
+    Controller.options.regionName = selectedRegion.captionText.text;
   }
   
 }
