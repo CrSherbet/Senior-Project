@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour {
+public class Controller {
 
 	private Tree TreeArr;
 	private Pond PondArr;
@@ -20,30 +20,30 @@ public class Controller : MonoBehaviour {
   public static Model currModel;
 
 	void Start () {
-
+	
 	}
 	
 	void Update () {
 		
 	}
 
-	void CalculateArea () {
+	public void CalculateArea () {
 		currModel = new Model("9991", "Square", 4.0f, getPond(), getTree(), getRice(), getHouse());
 	}
 
 	House getHouse () {
 		if(options.house == true) {	
-			if(options.region == 0) {
+			if(options.regionName == "Central") {
 				house = HouseType.getCHouse();
-			} else if(options.region == 1) {
+			} else if(options.regionName == "Northern") {
 				house = HouseType.getNHouse();
-			} else if(options.region == 2) {
+			} else if(options.regionName == "Southern") {
 				house = HouseType.getSHouse();
-			} else if(options.region == 3) {
+			} else if(options.regionName == "Eastern") {
 				house = HouseType.getEHouse();
-			} else if(options.region == 4) {
+			} else if(options.regionName == "Western") {
 				house = HouseType.getWHouse();
-			} else if(options.region == 5) {
+			} else if(options.regionName == "Northeastern") {
 				house = HouseType.getNEHouse();
 			} 
 		} else { house = null; }
@@ -52,17 +52,17 @@ public class Controller : MonoBehaviour {
 
 	Tree[] getTree () {
 		if(options.tree == true) {	
-			if(options.region == 0) {
+			if(options.regionName == "Central") {
 				tree = TreeArr.getCTree();
-			} else if(options.region == 1) {
+			} else if(options.regionName == "Northern") {
 				tree = TreeArr.getNTree();
-			} else if(options.region == 2) {
+			} else if(options.regionName == "Southern") {
 				tree = TreeArr.getSTree();
-			} else if(options.region == 3) {
+			} else if(options.regionName == "Eastern") {
 				tree = TreeArr.getETree();
-			} else if(options.region == 4) {
+			} else if(options.regionName == "Western") {
 				tree = TreeArr.getWTree();
-			} else if(options.region == 5) {
+			} else if(options.regionName == "Northeastern") {
 				tree = TreeArr.getNETree();
 			} 
 		} else { tree = null; }

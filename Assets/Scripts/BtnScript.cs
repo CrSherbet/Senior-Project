@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class BtnScript : MonoBehaviour {
 
+    public Controller MainControl;
+    
     void Start() { 
-
+        MainControl = new Controller();
     }
 
     // Update is called once per frame
@@ -16,6 +18,9 @@ public class BtnScript : MonoBehaviour {
     }
 
     public void LoadScene(string sceneName) {
+        if(sceneName == "ModelScene"){
+            MainControl.CalculateArea();
+        }
         SceneManager.LoadScene(sceneName);
     }
 }
