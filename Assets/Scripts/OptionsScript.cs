@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OptionsScript : MonoBehaviour {
 
 	void Start () {
-  
+    
   }
 
 	void Update () {
