@@ -9,12 +9,7 @@ public class Tree {
   private Tree[] ETree = { new Tree("Durian", "Eastern", 110.0f), new Tree("Mangosteen",  "Eastern", 20.0f) };
   private Tree[] WTree = { new Tree("Potato", "Western", 2.92f), new Tree("Pineapple", "Western", 22.50f) };
   private Tree[] NETree = { new Tree("Corn", "Northeastern", 9.89f), new Tree("Cane", "Northeastern", 0.63f) };
-
-  private Tree[] treeArr;
-  public static Options options = new Options();
-
-
-
+  
   public Tree () {
     species = "Banana";
     region = "Central";
@@ -27,23 +22,22 @@ public class Tree {
     price = inputPrice;
   }
 
-  public Tree[] getTree () {
-		if(options.tree == true) {	
-			if(options.regionName == "Central") {
-				treeArr = CTree;
-			} else if(options.regionName == "Northern") {
-				treeArr = NTree;
-			} else if(options.regionName == "Southern") {
-				treeArr = STree;
-			} else if(options.regionName == "Eastern") {
-				treeArr = ETree;
-			} else if(options.regionName == "Western") {
-				treeArr = WTree;
-			} else if(options.regionName == "Northeastern") {
-				treeArr = NETree;
+  public Tree[] getTree (string regionName, bool isTree) {
+		if(isTree == true) {	
+			if(regionName == "Central") {
+				return CTree;
+			} else if(regionName == "Northern") {
+				return NTree;
+			} else if(regionName == "Southern") {
+				return STree;
+			} else if(regionName == "Eastern") {
+				return ETree;
+			} else if(regionName == "Western") {
+				return WTree;
+			} else {
+				return NETree;
 			} 
-		} else { treeArr = null; }
-		return treeArr;
+		} else { return null; }
 	}
 
 }

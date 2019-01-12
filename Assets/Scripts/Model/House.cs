@@ -1,16 +1,6 @@
 public class House {
   public string region { get; set; }
 
-  private House CHouse = new House("Serene house");
-  private House  NHouse = new House ("Entirely house");
-  private House SHouse = new House("High roof");
-  private House EHouse = new House("Serene house");
-  private House WHouse = new House("Serene house"); 
-  private House NEHouse = new House("High cellar");
-  private House house;
-  public static Options options = new Options();
-
-
   public House () {
     region = "Central";
   }  
@@ -19,23 +9,22 @@ public class House {
     region = inputRegion;
   }
 
-  public House getHouse () {
-		if(options.house == true) {	
-			if(options.regionName == "Central") {
-				house = CHouse;
-			} else if(options.regionName == "Northern") {
-				house = NHouse;
-			} else if(options.regionName == "Southern") {
-				house = SHouse;
-			} else if(options.regionName == "Eastern") {
-				house = EHouse;
-			} else if(options.regionName == "Western") {
-				house = WHouse;
-			} else if(options.regionName == "Northeastern") {
-				house = NEHouse;
+  public House getHouse (string regionName, bool isHouse) {
+		if(isHouse == true) {	
+			if(regionName == "Central") {
+				return new House("Serene house");
+			} else if(regionName == "Northern") {
+				return new House ("Entirely house");
+			} else if(regionName == "Southern") {
+				return new House("High roof");
+			} else if(regionName == "Eastern") {
+				return new House("Serene house");
+			} else if(regionName == "Western") {
+				return new House("Serene house");
+			} else {
+				return new House("High cellar");
 			} 
-		} else { house = null; }
-		return house;
+		} else { return null; }
 	}
 
 }

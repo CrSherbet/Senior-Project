@@ -15,8 +15,8 @@ public class RiceField {
     price = inputPrice;
   }
 
-  public RiceField[] getRice () {
-		if(options.rice == true) {
+  public RiceField[] getRice (bool isRice) {
+		if(isRice == true) {
 			return rice;
 		} else { return null; }
 	}

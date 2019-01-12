@@ -3,8 +3,6 @@ public class Pond {
   public float price { get; set; }
 
   private Pond[] pond = { new Pond("Shrimp", 290.0f), new Pond("Snapper", 200.0f), new Pond("Carp", 35.0f) };
-  public static Options options = new Options();
-
 
   public Pond () {
     species = "Tilapia";
@@ -16,8 +14,8 @@ public class Pond {
     price = inputPrice;
   }
 
-  	public Pond[] getPond () {
-		if(options.pond == true) {
+  	public Pond[] getPond (bool isPond) {
+		if(isPond == true) {
 			return pond;
 		} else { return null; }
 	}
