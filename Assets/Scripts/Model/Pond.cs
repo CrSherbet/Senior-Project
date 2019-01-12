@@ -11,4 +11,9 @@ public class Pond {
     species = inputSpecies;
     price = inputPrice;
   }
+
+  public Pond[] getPonds() {
+    Pond[] PondArr = { new Pond("Shrimp", 290.0f), new Pond("Snapper", 200.0f), new Pond("Carp", 35.0f) };
+    return PondArr;
+  }
 }

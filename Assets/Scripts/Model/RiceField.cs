@@ -11,4 +11,9 @@ public class RiceField {
     species = inputSpecies;
     price = inputPrice;
   }
+
+  public RiceField[] getRice() {
+    RiceField[] rice = { new RiceField("Thai jasmine rice", 33.0f), new RiceField("Pathum rice", 18.0f), new RiceField("White rice", 11.7f) };
+    return rice;
+  }
 }
