@@ -7,8 +7,7 @@ public class InformationDetail : MonoBehaviour {
 
 	void Start () {
 		string updateText = "Tree: " + Controller.currModel.tree[0].species + ", " + 
-							Controller.currModel.tree[1].species + ", " + 
-							Controller.currModel.tree[2].species + ", ";
+							Controller.currModel.tree[1].species + ", ";
 		Text infoObj = GetComponent<Text>();
 		infoObj.text = updateText;
 	}
