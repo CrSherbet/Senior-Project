@@ -11,10 +11,10 @@ public class Model {
       id = inputID;
       name = inputName;
       size = inputAreaSize;
-      pond = new Pond[1];
-      tree = new Tree[1];
-      rice = new RiceField[1];
-      house = new House();
+      // pond = new Pond[1];
+      // tree = new Tree[1];
+      // rice = new RiceField[1];
+      // house = new House();
     }
 
     public Model (string inputID, string inputName, float inputAreaSize,

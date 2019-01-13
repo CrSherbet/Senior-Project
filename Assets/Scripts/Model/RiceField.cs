@@ -3,7 +3,6 @@ public class RiceField {
   public float price { get; set; }
 
   private RiceField[] rice = { new RiceField("Thai jasmine rice", 33.0f), new RiceField("Pathum rice", 18.0f), new RiceField("White rice", 11.7f) };
-  public static Options options = new Options();
 
   public RiceField () {
     species = "Thai Jasmine";
@@ -15,8 +14,8 @@ public class RiceField {
     price = inputPrice;
   }
 
-  public RiceField[] getRice (bool isRice) {
-		if(isRice == true) {
+  public RiceField[] getRice (Options options) {
+		if(options.rice == true) {
 			return rice;
 		} else { return null; }
 	}

@@ -16,18 +16,17 @@ public class Controller {
 	// private Model TrapezoidModel = new Model ("9994", "Trapezoid", 8.2f);
   public static Model currModel;
 
-	void Start () {
+  void Start () {
 	
-	}
+  }
 	
-	void Update () {
+  void Update () {
 		
-	}
+  }
 
-	public void CalculateArea () {
-	  currModel = new Model("9991", "Square", 4.0f, pond.getPond(options.pond), 
-	  			  tree.getTree(options.regionName, options.tree), rice.getRice(options.rice), 
-				  house.getHouse(options.regionName, options.house));
-	}
+  public void CalculateArea () {
+	  currModel = new Model("9991", "Square", 4.0f, pond.getPond(options), 
+				        tree.getTree(options), rice.getRice(options), house.getHouse(options));
+  }
 
 }

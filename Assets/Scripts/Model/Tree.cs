@@ -22,17 +22,17 @@ public class Tree {
     price = inputPrice;
   }
 
-  public Tree[] getTree (string regionName, bool isTree) {
-		if(isTree == true) {	
-			if(regionName == "Central") {
+  public Tree[] getTree (Options options) {
+		if(options.tree == true) {	
+			if(options.regionName == "Central") {
 				return CTree;
-			} else if(regionName == "Northern") {
+			} else if(options.regionName == "Northern") {
 				return NTree;
-			} else if(regionName == "Southern") {
+			} else if(options.regionName == "Southern") {
 				return STree;
-			} else if(regionName == "Eastern") {
+			} else if(options.regionName == "Eastern") {
 				return ETree;
-			} else if(regionName == "Western") {
+			} else if(options.regionName == "Western") {
 				return WTree;
 			} else {
 				return NETree;

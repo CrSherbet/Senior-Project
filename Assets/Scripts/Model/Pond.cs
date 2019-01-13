@@ -14,8 +14,8 @@ public class Pond {
     price = inputPrice;
   }
 
-  	public Pond[] getPond (bool isPond) {
-		if(isPond == true) {
+  	public Pond[] getPond (Options options) {
+		if(options.pond == true) {
 			return pond;
 		} else { return null; }
 	}
