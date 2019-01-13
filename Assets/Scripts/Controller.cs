@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Controller {
 
-  private House house;
-  private Tree tree;
-  private RiceField rice;
-  private Pond pond;
+  private House house = new House();
+  private Tree tree = new Tree();
+  private RiceField rice = new RiceField();
+  private Pond pond = new Pond();
 
   public static Options options = new Options();
-	// private Model SquareModel = new Model ("9991", "Square", 4.0f);
-	// private Model TriangleModel = new Model ("9992", "Triangle", 5.5f);
-	// private Model PentagonModel = new Model ("9993", "Pentagon", 8.2f);
-	// private Model TrapezoidModel = new Model ("9994", "Trapezoid", 8.2f);
+
   public static Model currModel;
 
   void Start () {
@@ -25,8 +22,8 @@ public class Controller {
   }
 
   public void CalculateArea () {
-	  currModel = new Model("9991", "Square", 4.0f, pond.getPond(options), 
-				        tree.getTree(options), rice.getRice(options), house.getHouse(options));
+	  currModel = new Model("9991", "Square", 4.0f, pond.getPond(), 
+				        tree.getTree(), rice.getRice(), house.getHouse());
   }
 
 }

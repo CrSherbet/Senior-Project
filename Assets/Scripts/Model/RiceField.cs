@@ -2,8 +2,6 @@ public class RiceField {
   public string species { get; set; }
   public float price { get; set; }
 
-  private RiceField[] rice = { new RiceField("Thai jasmine rice", 33.0f), new RiceField("Pathum rice", 18.0f), new RiceField("White rice", 11.7f) };
-
   public RiceField () {
     species = "Thai Jasmine";
     price = 15.0f;
@@ -14,9 +12,9 @@ public class RiceField {
     price = inputPrice;
   }
 
-  public RiceField[] getRice (Options options) {
-		if(options.rice == true) {
-			return rice;
+  public RiceField[] getRice () {
+		if(Controller.options.rice == true) {
+			return new RiceField[3] { new RiceField("Thai jasmine rice", 33.0f), new RiceField("Pathum rice", 18.0f), new RiceField("White rice", 11.7f) };
 		} else { return null; }
 	}
 }
