@@ -1,21 +1,21 @@
 public class Tree {
-  public string species { get; set; }
-  public string region { get; set; }
-  public float price { get; set; }
+    public string species { get; set; }
+    public string region { get; set; }
+    public float price { get; set; }
 
-  public Tree () {
-    species = "Banana";
-    region = "Central";
-    price = 50.0f;
-  }
+    public Tree () {
+        species = "Banana";
+        region = "Central";
+        price = 50.0f;
+    }
 
-  public Tree (string inputSpecies, string inputRegion, float inputPrice) {
-    species = inputSpecies;
-    region = inputRegion;
-    price = inputPrice;
-  }
+    public Tree (string inputSpecies, string inputRegion, float inputPrice) {
+        species = inputSpecies;
+        region = inputRegion;
+        price = inputPrice;
+    }
 
-  public Tree[] getTree () {
+    public Tree[] getTree () {
 		if(Controller.options.tree == true) {	
 			if(Controller.options.regionName == "Central") {
 				return new Tree[2] { new Tree("Mango", "Central", 53.50f), new Tree("rambutan", "Central", 43.0f) };
@@ -32,7 +32,6 @@ public class Tree {
 			} 
 		} else { return null; }
 	}
-
 }
 
 

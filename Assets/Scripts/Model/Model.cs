@@ -1,5 +1,5 @@
 public class Model {
-    public string id { get; }
+    public string Id { get; }
     public string name { get; set; }
     public float size { get; set; }
     public Pond[] pond { get; set; }
@@ -8,14 +8,14 @@ public class Model {
     public House house { get; set; }
 
     public Model (string inputID, string inputName, float inputAreaSize,
-     Pond[] inputPond, Tree[] inputTree, RiceField[] inputRice, House inputHouse) {
-      id = inputID;
-      name = inputName;
-      size = inputAreaSize;
-      pond = inputPond;
-      tree = inputTree;
-      rice = inputRice;
-      house = inputHouse;
+        Pond[] inputPond, Tree[] inputTree, RiceField[] inputRice, House inputHouse) {
+        Id = inputID;
+        name = inputName;
+        size = inputAreaSize;
+        pond = inputPond;
+        tree = inputTree;
+        rice = inputRice;
+        house = inputHouse;
     }
 }
 

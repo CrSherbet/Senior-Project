@@ -20,7 +20,7 @@ public class BtnScript : MonoBehaviour {
     public void LoadScene(string sceneName) {
         if(sceneName == "ModelScene"){
             MainControl.CalculateArea();
-        }
+        }   
         SceneManager.LoadScene(sceneName);
     }
 }
