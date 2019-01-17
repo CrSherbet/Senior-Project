@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class Controller {
 
-	private Model SquareModel = new Model ("9991", "Square", 4.0f);
-	// private Model TriangleModel = new Model ("9992", "Triangle", 5.5f);
-	// private Model PentagonModel = new Model ("9993", "Pentagon", 8.2f);
-	// private Model TrapezoidModel = new Model ("9994", "Trapezoid", 8.2f);
-	public static Options options = new Options();
-	public static Model currModel;
-	
-	void Start () {
-	
-	}
-	
-	void Update () {
-		
-	}
+    private House house = new House();
+    private Tree tree = new Tree();
+    private RiceField rice = new RiceField();
+    private Pond pond = new Pond();
 
-	public void CalculateArea () {
-		currModel = SquareModel;
-	}
+    public static Options options = new Options();
+
+    public static Model currModel;
+
+    void Start () {
+	
+    }
+	
+    void Update () {
+		
+    }
+
+    public void CalculateArea () {
+	    currModel = new Model("9991", "Square", 4.0f, pond.getPond(), 
+            tree.getTree(), rice.getRice(), house.getHouse());
+    }
+
 }
