@@ -21,9 +21,22 @@ public class Controller {
 		
     }
 
-    public void CalculateArea () {
-	    currModel = new Model("9991", "Square", 4.0f, pond.getPond(), 
+    public void CalculateArea (string modelId) {
+        if(modelId == "9994") {
+            currModel = new Model("9994", "Square", 4.0f, pond.getPond(), 
             tree.getTree(), rice.getRice(), house.getHouse());
+        } else if(modelId == "9993") {
+            currModel = new Model("9993", "Triangle", 4.0f, pond.getPond(), 
+            tree.getTree(), rice.getRice(), house.getHouse());
+        } else if(modelId == "9995") {
+            currModel = new Model("9995", "Pentagon", 4.0f, pond.getPond(), 
+            tree.getTree(), rice.getRice(), house.getHouse());
+        } else if(modelId == "9991") {
+            currModel = new Model("9991", "Rectangle", 4.0f, pond.getPond(), 
+            tree.getTree(), rice.getRice(), house.getHouse());
+        } else {
+            currModel = new Model("9994", "Square", 4.0f, pond.getPond(), 
+            tree.getTree(), rice.getRice(), house.getHouse());
+        }
     }
-
 }

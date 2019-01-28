@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class InformationDetail : MonoBehaviour {
 
+	private string TreeFormat = "";
+
 	void Start () {
 		string updateText = "Tree: " + Controller.currModel.tree[0].species + ", " + 
 							Controller.currModel.tree[1].species + ", ";
