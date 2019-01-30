@@ -9,21 +9,21 @@ public class House {
 		region = inputRegion;
 	}
 
-	public House getHouse () {
-		if(Controller.options.house == true) {	
+	public House[] getHouse () {
+			if(Controller.options.house == true) {	
 			if(Controller.options.regionName == "Central") {
-				return new House("Serene house");
-            } else if(Controller.options.regionName == "Northern") {
-				return new House ("Entirely house");
+				return new House[3] { new House("Elevated"), new House("Serene"), new House("Wide terrace") };
+      } else if(Controller.options.regionName == "Northern") {
+				return new House[3] { new House("Elevated"), new House("Narrow window"), new House("Dense") };
 			} else if(Controller.options.regionName == "Southern") {
-				return new House("High roof");
+				return new House[3] { new House("Provisional"), new House("Elevated"), new House("Made from bamboo") };
 			} else if(Controller.options.regionName == "Eastern") {
-				return new House("Serene house");
+				return new House[3] { new House("Elevated"), new House("Serene"), new House("Made from bamboo") };
 			} else if(Controller.options.regionName == "Western") {
-				return new House("Serene house");
+				return new House[3] { new House("Serene"), new House("Elevate"), new House("Gable roof") };
 			} else {
-				return new House("High cellar");
-            } 
+				return new House[3] { new House("Connecting terrace"), new House("Gable House"), new House("Made from wood") };
+      } 
 		} else { return null; }
 	}
 }
