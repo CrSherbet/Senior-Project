@@ -1,28 +1,34 @@
 public class House {
-	public string region { get; set; }
+	public string roof { get; set; }
+	public string material { get; set; }
+	public string type { get; set; }
 
 	public House () {
-		region = "Central";
+		roof = "Gable roof";
+		material = "Wood";
+		type = "Serene";
     }  
 		
-	public House (string inputRegion) {
-		region = inputRegion;
+	public House (string inputRoof, string inputMaterial, string inpustType) {
+		roof = inputRoof;
+		material = inputMaterial;
+		type = inpustType;
 	}
 
-	public House[] getHouse () {
-			if(Controller.options.house == true) {	
+	public House getHouse () {
+		if(Controller.options.house == true) {	
 			if(Controller.options.regionName == "Central") {
-				return new House[3] { new House("Elevated"), new House("Serene"), new House("Wide terrace") };
-      } else if(Controller.options.regionName == "Northern") {
-				return new House[3] { new House("Elevated"), new House("Narrow window"), new House("Dense") };
+				return new House("Manila roof", "Wood", "Serene");
+      		} else if(Controller.options.regionName == "Northern") {
+				return new House("Gable roof", "Wood", "Dense");
 			} else if(Controller.options.regionName == "Southern") {
-				return new House[3] { new House("Provisional"), new House("Elevated"), new House("Made from bamboo") };
+				return new House("Gable roof", "Bamboo", "Serene");
 			} else if(Controller.options.regionName == "Eastern") {
-				return new House[3] { new House("Elevated"), new House("Serene"), new House("Made from bamboo") };
+				return new House("Gable roof", "Bamboo", "Serene");
 			} else if(Controller.options.regionName == "Western") {
-				return new House[3] { new House("Serene"), new House("Elevate"), new House("Gable roof") };
+				return new House("Gable roof", "Wood", "Serene");
 			} else {
-				return new House[3] { new House("Connecting terrace"), new House("Gable House"), new House("Made from wood") };
+				return new House("Gable roof", "Wood", "Serene");
       } 
 		} else { return null; }
 	}
