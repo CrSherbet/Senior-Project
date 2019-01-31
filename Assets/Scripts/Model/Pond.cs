@@ -14,7 +14,19 @@ public class Pond {
 
   	public Pond[] getPond () {
 		if(Controller.options.pond == true) {
-			return new Pond[3] { new Pond("Shrimp", 290.0f), new Pond("Snapper", 200.0f), new Pond("Carp", 35.0f) };
+            if(Controller.options.regionName == "Central") {
+				return new Pond[3] { new Pond("Shrimp", 550.0f), new Pond("Snakehead", 110.0f), new Pond("Catfish", 53.75f) };
+            } else if(Controller.options.regionName == "Northern") {
+				return new Pond[3] { new Pond("Diary cattle", 18.25f), new Pond("Pig", 66.3f), new Pond("Chicken", 33.0f) };
+			} else if(Controller.options.regionName == "Southern") {
+				return new Pond[3] { new Pond("Goat", 121.51f), new Pond("King mackerel", 132.29f), new Pond("White pomfre", 600.0f) };
+			} else if(Controller.options.regionName == "Eastern") {
+				return new Pond[3] { new Pond("Pig", 66.3f), new Pond("Beef cattle", 92.42f), new Pond("Diary cattle", 18.25f) };
+			} else if(Controller.options.regionName == "Western") {
+				return new Pond[3] { new Pond("Goat", 121.51f), new Pond("Pig", 66.3f), new Pond("Chicken", 33.0f) };
+			} else {
+				return new Pond[3] { new Pond("Buffalo", 97.18f), new Pond("Pig", 66.3f), new Pond("Beef cattle", 92.42f) };
+            } 
 		} else { return null; }
 	}
 }
