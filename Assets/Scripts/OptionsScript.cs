@@ -13,7 +13,7 @@ public class OptionsScript : MonoBehaviour {
 		
 	}
 
-    public void SetOptionValuse () {
+    public void SetOptionValues () {
         GameObject.Find("RegionDropdown").GetComponent<Dropdown>().value = Controller.options.region;
         GameObject.Find("HouseToggle").GetComponent<Toggle>().isOn = Controller.options.house;
         GameObject.Find("PondToggle").GetComponent<Toggle>().isOn = Controller.options.pond;

@@ -14,7 +14,19 @@ public class RiceField {
 
     public RiceField[] getRice () {
 		if(Controller.options.rice == true) {
-			return new RiceField[3] { new RiceField("Thai jasmine rice", 33.0f), new RiceField("Pathum rice", 18.0f), new RiceField("White rice", 11.7f) };
+			if(Controller.options.regionName == "Central") {
+				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Pathum rice", 11.1f) };
+            } else if(Controller.options.regionName == "Northern") {
+				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Glutinous rice", 12.5f) };
+			} else if(Controller.options.regionName == "Southern") {
+				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Riceberry", 25f) };
+			} else if(Controller.options.regionName == "Eastern") {
+				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Brown rice", 8.6f) };
+			} else if(Controller.options.regionName == "Western") {
+				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Riceberry", 25f) };
+			} else {
+				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Glutinous rice", 12.5f) };
+            } 
 		} else { return null; }
 	}
 }
