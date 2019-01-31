@@ -15,7 +15,6 @@ public class House {
 				type = inpustType;
 		}
 
-
 		public House getHouse () {
 				if(Controller.options.house == true) {	
 						if(Controller.options.regionName == "Central") {
