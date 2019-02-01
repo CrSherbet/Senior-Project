@@ -22,6 +22,10 @@ public class BtnScript : MonoBehaviour {
     }
 
     public void ChangeModel(string modelId) {
-        MainControl.CalculateArea(modelId);   
+        if (modelId == "") {
+            MainControl.CalculateArea(Controller.currModel.Id);   
+        } else {
+            MainControl.CalculateArea(modelId);   
+        }
     }
 }
