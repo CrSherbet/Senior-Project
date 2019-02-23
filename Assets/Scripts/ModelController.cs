@@ -7,10 +7,24 @@ public class ModelController : MonoBehaviour {
 	void Start () {
 		  LineRenderer lineRenderer = GetComponent<LineRenderer>();
 			Vector3[] linePos = Controller.currModel.linePos;
-			lineRenderer.positionCount = linePos.Length;
-			for (int i = 0; i < linePos.Length; i++) {
-          lineRenderer.SetPosition(i, linePos[i]);
-      }
+			
+			Vector3[] area = Controller.currModel.area;
+			
+			var result = new List<Vector3>();
+			result.AddRange(linePos);
+			
+			if (area != null) {
+				result.AddRange(area);
+			} 
+
+			Vector3[] showResult = result.ToArray();
+
+			lineRenderer.positionCount = showResult.Length;
+			
+			for (int i = 0; i < showResult.Length; i++) {
+					lineRenderer.SetPosition(i, showResult[i]);
+      		}
+
 	}
 	
 	// Update is called once per frame

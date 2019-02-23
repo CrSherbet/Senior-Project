@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Pond {
     public string species { get; set; }
     public float price { get; set; }
@@ -27,6 +29,17 @@ public class Pond {
 			} else {
 				return new Pond[3] { new Pond("Buffalo", 97.18f), new Pond("Pig", 66.3f), new Pond("Beef cattle", 92.42f) };
             } 
+		} else { return null; }
+	}
+
+	public Vector3[] getArea() {
+		if(Controller.options.pond == true) {
+			return new Vector3[5] { 
+				new Vector3(175.0f, 420.0f, 0.0f), 
+				new Vector3(175.0f, 530.0f, 0.0f),
+				new Vector3(50.0f, 530.0f, 0.0f),
+				new Vector3(50.0f, 420.0f, 0.0f),
+				new Vector3(175.0f, 420.0f, 0.0f) };
 		} else { return null; }
 	}
 }

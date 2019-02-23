@@ -45,7 +45,7 @@ public class Controller {
     public void CalculateArea (string modelId) {
         if(modelId == "9994") {
             currModel = new Model("9994", "Square", 4.0f, SquarePos, pond.getPond(), 
-            tree.getTree(), rice.getRice(), house.getHouse());
+            tree.getTree(), rice.getRice(), house.getHouse(), CombineArea());
         } else if(modelId == "9993") {
             currModel = new Model("9993", "Triangle", 4.0f, TrianglePos, pond.getPond(), 
             tree.getTree(), rice.getRice(), house.getHouse());
@@ -59,5 +59,15 @@ public class Controller {
             currModel = new Model("9997", "Polygon", 4.0f, SquarePos, pond.getPond(), 
             tree.getTree(), rice.getRice(), house.getHouse());
         }
+    }
+
+    public Vector3[] CombineArea() {
+        var areaList = new List<Vector3>();
+        areaList.AddRange(house.getArea());
+        areaList.AddRange(pond.getArea());
+        areaList.AddRange(rice.getArea());
+        areaList.AddRange(tree.getArea());
+        Vector3[] result = areaList.ToArray();
+        return  result;
     }
 }
