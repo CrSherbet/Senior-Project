@@ -35,11 +35,11 @@ public class Pond {
 	public Vector3[] getArea() {
 		if(Controller.options.pond == true) {
 			return new Vector3[5] { 
-				new Vector3(175.0f, 420.0f, 0.0f), 
-				new Vector3(175.0f, 530.0f, 0.0f),
+				new Vector3(150.0f, 357.5f, 0.0f),
+				new Vector3(150.0f, 530.0f, 0.0f),
 				new Vector3(50.0f, 530.0f, 0.0f),
-				new Vector3(50.0f, 420.0f, 0.0f),
-				new Vector3(175.0f, 420.0f, 0.0f) };
+				new Vector3(50.0f, 357.5f, 0.0f), 
+				new Vector3(150.0f, 357.5f, 0.0f) };
 		} else { return null; }
 	}
 }

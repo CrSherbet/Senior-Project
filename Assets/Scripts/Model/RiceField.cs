@@ -35,11 +35,11 @@ public class RiceField {
 	public Vector3[] getArea() {
 		if(Controller.options.rice == true) {
 			return new Vector3[5] { 
-				new Vector3(175.0f, 420.0f, 0.0f), 
-				new Vector3(175.0f, 530.0f, 0.0f),
+				new Vector3(150.0f, 415.0f, 0.0f), 
+				new Vector3(150.0f, 530.0f, 0.0f),
 				new Vector3(300.0f, 530.0f, 0.0f),
-				new Vector3(300.0f, 420.0f, 0.0f),
-				new Vector3(175.0f, 420.0f, 0.0f) };
+				new Vector3(300.0f, 415.0f, 0.0f),
+				new Vector3(150.0f, 415.0f, 0.0f) };
 		} else { return null; }
 	}
 }
