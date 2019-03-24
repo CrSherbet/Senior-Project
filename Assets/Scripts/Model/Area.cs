@@ -17,8 +17,8 @@ public class Area {
 
     // find center of polygon
     public Vector3 getValue(Vector3[] test) {
-        float maxX = test[0].x, maxY = test[0].x;
-        float minX = test[0].y, minY = test[0].y; 
+        float maxX = test[0].x, maxY = test[0].y;
+        float minX = test[0].x, minY = test[0].y; 
         float centerX = 0.0f, centerY = 0.0f;
 
         for(int i = 0; i < test.Length; i++) {
