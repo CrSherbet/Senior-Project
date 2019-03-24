@@ -9,6 +9,7 @@ public class Model {
     public RiceField[] rice { get; set; }
     public House house { get; set; }
     public Vector3[] linePos {get; set;}
+    public Vector3[] area { get; set; }
 
     public Model (string inputID, string inputName, float inputAreaSize, Vector3[] inputLinePos,
         Pond[] inputPond, Tree[] inputTree, RiceField[] inputRice, House inputHouse) {
@@ -20,6 +21,19 @@ public class Model {
         tree = inputTree;
         rice = inputRice;
         house = inputHouse;
+    }
+
+    public Model (string inputID, string inputName, float inputAreaSize, Vector3[] inputLinePos,
+        Pond[] inputPond, Tree[] inputTree, RiceField[] inputRice, House inputHouse, Vector3[] inputArea) {
+        Id = inputID;
+        name = inputName;
+        size = inputAreaSize;
+        linePos = inputLinePos;
+        pond = inputPond;
+        tree = inputTree;
+        rice = inputRice;
+        house = inputHouse;
+        area = inputArea;
     }
 }
 

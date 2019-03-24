@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Tree {
     public string species { get; set; }
     public string region { get; set; }
@@ -30,6 +32,17 @@ public class Tree {
 			} else {
 				return new Tree[2] { new Tree("Corn", "Northeastern", 9.89f), new Tree("Cane", "Northeastern", 0.63f) };
 			} 
+		} else { return null; }
+	}
+
+	public Vector3[] getArea() {
+		if(Controller.options.pond == true) {
+			return new Vector3[5] { 
+				new Vector3(150.0f, 300.0f, 0.0f), 
+				new Vector3(300.0f, 300.0f, 0.0f),
+				new Vector3(300.0f, 415.0f, 0.0f),
+				new Vector3(150.0f, 415.0f, 0.0f),
+				new Vector3(150.0f, 300.0f, 0.0f) };
 		} else { return null; }
 	}
 }

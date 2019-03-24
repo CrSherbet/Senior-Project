@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class House {
 		public string roof { get; set; }
 		public string material { get; set; }
@@ -31,5 +33,16 @@ public class House {
 								return new House("Gable roof", "Wood", "Serene");
 						} 
 				} else { return null; }
+		}
+
+		public Vector3[] getArea() {
+			if(Controller.options.house == true) {
+				return new Vector3[5] { 
+					new Vector3(50.0f, 357.5f, 0.0f), 
+					new Vector3(150.0f, 357.5f, 0.0f),
+					new Vector3(150.0f, 300.0f, 0.0f),
+					new Vector3(50.0f, 300.0f, 0.0f),
+					new Vector3(50.0f, 357.5f, 0.0f) };
+			} else { return null; }
 		}
 }

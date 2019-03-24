@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RiceField {
     public string species { get; set; }
     public float price { get; set; }
@@ -27,6 +29,17 @@ public class RiceField {
 			} else {
 				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Glutinous rice", 12.5f) };
             } 
+		} else { return null; }
+	}
+
+	public Vector3[] getArea() {
+		if(Controller.options.rice == true) {
+			return new Vector3[5] { 
+				new Vector3(150.0f, 415.0f, 0.0f), 
+				new Vector3(150.0f, 530.0f, 0.0f),
+				new Vector3(300.0f, 530.0f, 0.0f),
+				new Vector3(300.0f, 415.0f, 0.0f),
+				new Vector3(150.0f, 415.0f, 0.0f) };
 		} else { return null; }
 	}
 }
