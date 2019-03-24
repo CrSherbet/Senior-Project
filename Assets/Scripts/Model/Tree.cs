@@ -39,9 +39,9 @@ public class Tree {
 		if(Controller.options.pond == true) {
 			return new Vector3[5] { 
 				new Vector3(150.0f, 300.0f, 0.0f), 
-				new Vector3(150.0f, 300.0f, 0.0f),
 				new Vector3(300.0f, 300.0f, 0.0f),
 				new Vector3(300.0f, 415.0f, 0.0f),
+				new Vector3(150.0f, 415.0f, 0.0f),
 				new Vector3(150.0f, 300.0f, 0.0f) };
 		} else { return null; }
 	}

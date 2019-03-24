@@ -16,23 +16,23 @@ public class Area {
     }
 
     // find center of polygon
-    public Vector3 getValue(Vector3[] test) {
-        float maxX = test[0].x, maxY = test[0].y;
-        float minX = test[0].x, minY = test[0].y; 
+    public Vector3 getValue(Vector3[] areaArray) {
+        float maxX = areaArray[0].x, maxY = areaArray[0].y;
+        float minX = areaArray[0].x, minY = areaArray[0].y; 
         float centerX = 0.0f, centerY = 0.0f;
 
-        for(int i = 0; i < test.Length; i++) {
-            if(test[i].x > maxX) {
-                maxX = test[i].x;
+        for(int i = 0; i < areaArray.Length; i++) {
+            if(areaArray[i].x > maxX) {
+                maxX = areaArray[i].x;
             } 
-            if(test[i].x < minX) {
-                minX = test[i].x;
+            if(areaArray[i].x < minX) {
+                minX = areaArray[i].x;
             } 
-            if(test[i].y > maxY) {
-                maxY = test[i].y;
+            if(areaArray[i].y > maxY) {
+                maxY = areaArray[i].y;
             } 
-            if(test[i].y < minY) {
-                minY = test[i].y;
+            if(areaArray[i].y < minY) {
+                minY = areaArray[i].y;
             } 
         }
 
