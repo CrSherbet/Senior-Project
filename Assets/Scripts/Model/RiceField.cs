@@ -14,7 +14,7 @@ public class RiceField {
         price = inputPrice;
     }
 
-    public RiceField[] getRice () {
+    public RiceField[] getDetail () {
 		if(Controller.options.rice == true) {
 			if(Controller.options.regionName == "Central") {
 				return new RiceField[2] { new RiceField("Thai jasmine rice", 16.3f), new RiceField("Pathum rice", 11.1f) };

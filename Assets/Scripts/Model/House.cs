@@ -17,7 +17,7 @@ public class House {
 				type = inpustType;
 		}
 
-		public House getHouse () {
+		public House getDetail () {
 				if(Controller.options.house == true) {	
 						if(Controller.options.regionName == "Central") {
 								return new House("Manila roof", "Wood", "Serene");
@@ -33,16 +33,5 @@ public class House {
 								return new House("Gable roof", "Wood", "Serene");
 						} 
 				} else { return null; }
-		}
-
-		public Vector3[] getArea() {
-			if(Controller.options.house == true) {
-				return new Vector3[5] { 
-					new Vector3(50.0f, 357.5f, 0.0f), 
-					new Vector3(150.0f, 357.5f, 0.0f),
-					new Vector3(150.0f, 300.0f, 0.0f),
-					new Vector3(50.0f, 300.0f, 0.0f),
-					new Vector3(50.0f, 357.5f, 0.0f) };
-			} else { return null; }
 		}
 }
