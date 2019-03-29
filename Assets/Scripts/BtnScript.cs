@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,4 +32,14 @@ public class BtnScript : MonoBehaviour {
             MainControl.CalculateArea(modelId);   
         }
     }
+
+    public void ExportPDF(){
+        FileStream fs = new FileStream("ARFarm_Result.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+        Document doc = new Document();
+        PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+        doc.Open();
+        doc.Add(new Paragraph("Hello World"));
+        doc.Close();
+    }
+
 }
