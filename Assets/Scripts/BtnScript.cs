@@ -40,20 +40,10 @@ public class BtnScript : MonoBehaviour {
         }
     }
 
-    public void MoveGroup(){
-        if(GameObject.Find("Blueprint").active) {
-            GameObject.Find("3DBtnText").GetComponent<Text>().text = "3D";
-            GameObject.Find("Group3DBP").GetComponent<Transform>().localPosition = new Vector3(0f, 21f, -593f);
-            GameObject.Find("Group3DBP").GetComponent<Transform>().Rotate(57.938f, 0f, 0f);
-            GameObject.Find("Group3DBP").GetComponent<GameObject>().SetActive(true);
-            GameObject.Find("Blueprint").GetComponent<GameObject>().SetActive(false);
-        } else {
-            GameObject.Find("3DBtnText").GetComponent<Text>().text = "2D";
-            GameObject.Find("Group3DBP").GetComponent<Transform>().Rotate(-57.938f, 0f, 0f);
-            GameObject.Find("Group3DBP").GetComponent<Game bject>().SetActive(false);
-            GameObject.Find("Blueprint").GetComponent<GameObject>().SetActive(true);
-        }
+    public void SetUp3DModel(Transform model){
+        model.GetComponent<Transform>().rotation = Model3DController.originalRotationValue;
     }
+
 
     public void ExportPDF(){
         Pond[] pond = new Pond().getDetail();

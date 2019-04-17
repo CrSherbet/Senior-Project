@@ -11,11 +11,6 @@ public class ModelController : MonoBehaviour {
 		public Transform TreeModel;
 
 		void Start () {
-				RiceModel = GameObject.Find("RiceModel").GetComponent<Transform>();
-				PondModel = GameObject.Find("PondModel").GetComponent<Transform>();
-				HouseModel = GameObject.Find("HouseModel").GetComponent<Transform>();
-				TreeModel = GameObject.Find("TreeModel").GetComponent<Transform>();
-	
 				LineRenderer lineRenderer = GetComponent<LineRenderer>();
 				List<Vector3> areaPos = Controller.currModel.dividedAreaPos;
 
@@ -24,11 +19,10 @@ public class ModelController : MonoBehaviour {
 				for (int i = 0; i < areaPos.Count; i++) {
 						lineRenderer.SetPosition(i, areaPos[i]);
 				}
-
-				RiceModel.position = Controller.currModel.riceArea.center;
-				HouseModel.position = Controller.currModel.houseArea.center;
-				PondModel.position = Controller.currModel.pondArea.center;
-				TreeModel.position = Controller.currModel.treeArea.center;
+				RiceModel.GetComponent<Transform>().position = Controller.currModel.riceArea.center;
+				HouseModel.GetComponent<Transform>().position = Controller.currModel.houseArea.center;
+				PondModel.GetComponent<Transform>().position = Controller.currModel.pondArea.center;
+				TreeModel.GetComponent<Transform>().position = Controller.currModel.treeArea.center;
 		}
 		
 		void Update () {

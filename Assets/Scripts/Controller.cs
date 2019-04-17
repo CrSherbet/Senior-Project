@@ -45,9 +45,7 @@ public class Controller {
             currModel = new Model("9995", "Pentagon", PentagonPos);
         } else if(modelId == "9991") {
             currModel = new Model("9991", "Rectangle", RectanglePos);
-        } else {
-            currModel = new Model("9997", "Polygon", SquarePos);
-        }
+        } 
     }
 
 }
