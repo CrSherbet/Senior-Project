@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class RiceField {
+	public string desc { get; set; }
     public string species { get; set; }
     public float price { get; set; }
 
