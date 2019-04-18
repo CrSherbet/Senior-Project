@@ -12,23 +12,24 @@ using UnityEngine.SceneManagement;
 public class BtnScript : MonoBehaviour {
 
     public static Controller MainControl;
-    static int isFirstOpen = 0;
+    static int OpenTime = 0;
     
     void Start() { 
-        if(isFirstOpen>1){
-            GameObject.Find("Tutorial").SetActive(false);
+        if(OpenTime>1){
+            Destroy(GameObject.Find("Tutorial"));
+            if(SceneManager.GetActiveScene().name == "ModelScene"){
+                Destroy(GameObject.Find("Tutorial2"));
+            }
         }
         MainControl = new Controller(); 
-       
     }
 
-    // Update is called once per frame
     void Update() {
     
     }
 
     public void LoadScene(string sceneName) {
-        isFirstOpen++;
+        OpenTime++;
         SceneManager.LoadScene(sceneName);
     }
 
@@ -44,6 +45,9 @@ public class BtnScript : MonoBehaviour {
         model.GetComponent<Transform>().rotation = Model3DController.originalRotationValue;
     }
 
+    public void destroyTutorial(Transform tutorial){
+        Destroy(tutorial);
+    }
 
     public void ExportPDF(){
         Pond[] pond = new Pond().getDetail();

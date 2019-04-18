@@ -5,9 +5,9 @@ using UnityEngine;
 public class Model3DController : MonoBehaviour {
 
     public Transform RiceModel;
-		public Transform HouseModel;
-		public Transform PondModel;
-		public Transform TreeModel;
+	public Transform HouseModel;
+	public Transform PondModel;
+	public Transform TreeModel;
     public static Quaternion originalRotationValue; 
     Transform Model3D;
 
@@ -17,7 +17,7 @@ public class Model3DController : MonoBehaviour {
 				PondModel.GetComponent<Transform>().position = Controller.currModel.pondArea.center;
 				TreeModel.GetComponent<Transform>().position = Controller.currModel.treeArea.center;
 
-    		MeshFilter mf = GetComponent<MeshFilter>();
+    	MeshFilter mf = GetComponent<MeshFilter>();
         Mesh mesh = new Mesh();
         mf.mesh = mesh;
     
@@ -65,9 +65,9 @@ public class Model3DController : MonoBehaviour {
         originalRotationValue = Model3D.rotation;
     }
 		
-		void Update () {
+	void Update () {
       
-		}
+	}
 }
 
 
