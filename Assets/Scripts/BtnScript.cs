@@ -30,6 +30,12 @@ public class BtnScript : MonoBehaviour {
         SceneManager.LoadScene(sceneName);
     }
 
+    public void DestroyTutorial(){
+        if(OpenTime>1){
+            Destroy(GameObject.Find("Tutorial2"));
+        }
+    }
+
     public void ChangeModel(string modelId) {
         if (modelId == "") {
             MainControl.CalculateArea(Controller.currModel.Id);   

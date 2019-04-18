@@ -59,7 +59,7 @@ public class Model3DController : MonoBehaviour {
         }
 
         Model3D = GameObject.Find("Group3DBP").GetComponent<Transform>();
-        Model3D.localPosition = new Vector3(-238f, -120f, -429f);
+        Model3D.localPosition = new Vector3(-318f, -185f, -107f);
         Model3D.Rotate(50f, 0f, 45f);
         Model3D.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         originalRotationValue = Model3D.rotation;
