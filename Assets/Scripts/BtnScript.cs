@@ -17,9 +17,6 @@ public class BtnScript : MonoBehaviour {
     void Start() { 
         if(OpenTime>1){
             Destroy(GameObject.Find("Tutorial"));
-            if(SceneManager.GetActiveScene().name == "ModelScene"){
-                Destroy(GameObject.Find("Tutorial2"));
-            }
         }
         MainControl = new Controller(); 
     }
@@ -45,11 +42,12 @@ public class BtnScript : MonoBehaviour {
         model.GetComponent<Transform>().rotation = Model3DController.originalRotationValue;
     }
 
-    public void destroyTutorial(Transform tutorial){
-        Destroy(tutorial);
+    public void ExportPDF(){
+        CreatePDF();
+        new NativeShare().AddFile(Application.streamingAssetsPath + "/ARFarm_Result.pdf").SetSubject( "Subject goes here" ).SetText( "Hello world!" ).Share();
     }
 
-    public void ExportPDF(){
+    public void CreatePDF(){
         Pond[] pond = new Pond().getDetail();
         Tree[] tree = new Tree().getDetail();
         RiceField[] rice = new RiceField().getDetail();
@@ -74,7 +72,11 @@ public class BtnScript : MonoBehaviour {
 
         FileStream fs = new FileStream("ARFarm_Result.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
         Document doc = new Document();
-        PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+        try {
+            PdfWriter.GetInstance(doc, new FileStream(Application.streamingAssetsPath + "/ARFarm_Result.pdf", FileMode.Create));
+        } catch(System.Exception e){
+
+        }
         doc.Open();
         Paragraph header = new Paragraph("Result of Analyzation", headerFont);       
         Paragraph TextUnder3D = new Paragraph("3D Model or Screen Shot");
