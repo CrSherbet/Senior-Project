@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ public class Area {
     public float size { get; set;}
 	public Vector3 center { get; set; }
 	public List<Vector3> areaPos { get; set; }
-
+  
     public Area (){
         name = "Default Name";
         areaPos = new List<Vector3>();
@@ -24,7 +25,30 @@ public class Area {
     }
 
     public float getAreaSize(){
-        return 4.0f;
+        List<Vector3> clockwisePos;
+        if(areaPos[0].x == areaPos[1].x){
+            if(areaPos[0].y > areaPos[1].y){
+                clockwisePos = new List<Vector3>(areaPos);
+            } else {
+                clockwisePos = new List<Vector3>(areaPos);
+                clockwisePos.Reverse();
+            }
+        } else if(areaPos[0].x < areaPos[1].x) {
+            clockwisePos = new List<Vector3>(areaPos);
+            clockwisePos.Reverse();
+        } else {
+            clockwisePos = new List<Vector3>(areaPos);
+        }
+        clockwisePos.Add(clockwisePos[0]);
+        
+        float xy = 0f;
+        float yx = 0f;
+        
+        for(int i=0; i < clockwisePos.Count - 1; i++){
+            xy += clockwisePos[i].x * clockwisePos[i+1].y;
+            yx += clockwisePos[i].y * clockwisePos[i+1].x;
+        }
+        return Math.Abs((xy - yx)/2.0f);
     }
 
     // find center of polygon
@@ -32,7 +56,7 @@ public class Area {
         float maxX = areaPos[0].x, maxY = areaPos[0].y;
         float minX = areaPos[0].x, minY = areaPos[0].y; 
         float centerX = 0.0f, centerY = 0.0f;
-
+        
         for(int i = 0; i < areaPos.Count; i++) {
             if(areaPos[i].x > maxX) {
                 maxX = areaPos[i].x;

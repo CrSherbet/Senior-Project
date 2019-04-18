@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class Tree {
+	public string desc { get; set; }
     public string species { get; set; }
     public string region { get; set; }
     public float price { get; set; }

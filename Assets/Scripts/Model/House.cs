@@ -5,6 +5,7 @@ public class House {
 		public string material { get; set; }
 		public string type { get; set; }
 
+
 		public House () {
 				roof = "Gable roof";
 				material = "Wood";

@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class ModelController : MonoBehaviour {
+		
 		public Transform RiceModel;
 		public Transform HouseModel;
 		public Transform PondModel;
@@ -23,12 +24,13 @@ public class ModelController : MonoBehaviour {
 				for (int i = 0; i < areaPos.Count; i++) {
 						lineRenderer.SetPosition(i, areaPos[i]);
 				}
-		}
-		
-		void Update () {
+
 				RiceModel.position = Controller.currModel.riceArea.center;
 				HouseModel.position = Controller.currModel.houseArea.center;
 				PondModel.position = Controller.currModel.pondArea.center;
 				TreeModel.position = Controller.currModel.treeArea.center;
+		}
+		
+		void Update () {
 		}
 }
