@@ -11,7 +11,7 @@ namespace UnityEngine.XR.iOS
 	{
 		private serializablePlaneGeometry sPlaneGeometry;
 
-		public ARPlaneGeometry (serializablePlaneGeometry ufg)
+		public ARPlaneGeometry (serializablePlaneGeometry ufg) 
 		{
 			sPlaneGeometry = ufg;
 		}

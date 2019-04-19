@@ -289,7 +289,7 @@ namespace UnityEngine.XR.iOS.Utils
 		}
 
 		#if !UNITY_EDITOR
-		public static implicit operator serializablePlaneGeometry(ARPlaneGeometry planeGeom)
+		public static implicit operator serializablePlaneGeometry(ARPlaneGeometry planeGeom) 
 		{
 			if (planeGeom.vertexCount != 0 && planeGeom.textureCoordinateCount != 0 && planeGeom.triangleCount != 0)
 			{
@@ -474,7 +474,7 @@ namespace UnityEngine.XR.iOS.Utils
 		#endif //!UNITY_EDITOR
 
 		public Vector3 [] Vertices {
-			get {
+			get { 
 				if (vertices != null) {
 					int numVectors = vertices.Length / (3 * sizeof(float));
 					Vector3[] verticesVec = new Vector3[numVectors];

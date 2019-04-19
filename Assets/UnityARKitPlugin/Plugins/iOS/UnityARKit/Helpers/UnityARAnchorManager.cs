@@ -5,11 +5,11 @@ using Collections.Hybrid.Generic;
 
 namespace UnityEngine.XR.iOS
 {
-	public class UnityARAnchorManager 
+	public class UnityARAnchorManager
 	{
 
 
-		private LinkedListDictionary<string, ARPlaneAnchorGameObject> planeAnchorMap;
+		private LinkedListDictionary<string, ARPlaneAnchorGameObject> planeAnchorMap; 
 
 
         public UnityARAnchorManager ()

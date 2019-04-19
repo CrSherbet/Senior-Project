@@ -6,7 +6,7 @@ namespace UnityEngine.XR.iOS
 	public class UnityARGeneratePlane : MonoBehaviour
 	{
 		public GameObject planePrefab;
-        private UnityARAnchorManager unityARAnchorManager;
+        private UnityARAnchorManager unityARAnchorManager;         
 
 		// Use this for initialization
 		void Start () {
@@ -14,7 +14,7 @@ namespace UnityEngine.XR.iOS
 			UnityARUtility.InitializePlanePrefab (planePrefab);
 		}
 
-        void OnDestroy()
+        void OnDestroy() 
         {
             unityARAnchorManager.Destroy ();
         }

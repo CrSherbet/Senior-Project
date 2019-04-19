@@ -30,9 +30,11 @@ public class BtnScript : MonoBehaviour {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void DestroyTutorial(){
-        if(OpenTime>1){
-            Destroy(GameObject.Find("Tutorial2"));
+    public void DestroyTutorial(GameObject tutorial){
+        OpenTime++;
+        print(OpenTime);
+        if(OpenTime>2){
+            Destroy(tutorial);
         }
     }
 
@@ -44,16 +46,25 @@ public class BtnScript : MonoBehaviour {
         }
     }
 
+    public void SetBtnActive(GameObject setting){
+        if(setting.active){
+            setting.SetActive(false);
+        } else {
+            setting.SetActive(true);
+        }
+    }
+
     public void SetUp3DModel(Transform model){
         model.GetComponent<Transform>().rotation = Model3DController.originalRotationValue;
     }
 
-    public void ExportPDF(){
-        CreatePDF();
-        new NativeShare().AddFile(Application.streamingAssetsPath + "/ARFarm_Result.pdf").SetSubject( "Subject goes here" ).SetText( "Hello world!" ).Share();
+    public void ExportPDF(GameObject Saved){
+        StartCoroutine(CreatePDF());
+        new NativeShare().AddFile(Application.streamingAssetsPath + "/ARFarm_Result.pdf").Share();
+        Saved.SetActive(true);
     }
 
-    public void CreatePDF(){
+    IEnumerator CreatePDF(){
         Pond[] pond = new Pond().getDetail();
         Tree[] tree = new Tree().getDetail();
         RiceField[] rice = new RiceField().getDetail();
@@ -120,6 +131,7 @@ public class BtnScript : MonoBehaviour {
         EndText.Alignment = Element.ALIGN_CENTER;  
         doc.Add(EndText);
         doc.Close();
+        yield return null;
     }
 }
         

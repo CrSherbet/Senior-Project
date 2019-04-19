@@ -9,7 +9,7 @@ namespace Collections.Hybrid.Generic
 	/// </summary>
 	/// <typeparam name="TK">key value type. It is recomended that this be "int", for speed purposes.</typeparam>
 	/// <typeparam name="TV">The value type. Can be anything you like.</typeparam>
-	public class LinkedListDictionary<TK, TV>
+	public class LinkedListDictionary<TK, TV> 
 	{
 		private readonly Dictionary<TK, LLEntry> dictionary = new Dictionary<TK, LLEntry>();
 		private readonly LinkedList<TV> list = new LinkedList<TV>();
