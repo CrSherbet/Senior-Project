@@ -39,8 +39,7 @@ public class Area {
         } else {
             clockwisePos = new List<Vector3>(areaPos);
         }
-        clockwisePos.Add(clockwisePos[0]);
-        
+
         float xy = 0f;
         float yx = 0f;
         

@@ -30,6 +30,10 @@ public class BtnScript : MonoBehaviour {
         SceneManager.LoadScene(sceneName);
     }
 
+    public void SetCurrId(string ModelId){
+        MainControl.SetId(ModelId); 
+    }
+
     public void DestroyTutorial(GameObject tutorial){
         OpenTime++;
         print(OpenTime);
@@ -38,12 +42,8 @@ public class BtnScript : MonoBehaviour {
         }
     }
 
-    public void ChangeModel(string modelId) {
-        if (modelId == "") {
-            MainControl.CalculateArea(Controller.currModel.Id);   
-        } else {
-            MainControl.CalculateArea(modelId);   
-        }
+    public void ChangeModel() {
+        MainControl.CalculateArea();   
     }
 
     public void SetBtnActive(GameObject setting){
@@ -92,7 +92,7 @@ public class BtnScript : MonoBehaviour {
         try {
             PdfWriter.GetInstance(doc, new FileStream(Application.streamingAssetsPath + "/ARFarm_Result.pdf", FileMode.Create));
         } catch(System.Exception e){
-
+            Debug.Log(e);
         }
         doc.Open();
         Paragraph header = new Paragraph("Result of Analyzation", headerFont);       

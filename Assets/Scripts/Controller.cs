@@ -6,6 +6,7 @@ public class Controller {
     public static Options options = new Options();
     public static Area area = new Area();
     public static Model currModel;
+    public static string currId;
 
     private List<Vector3> SquarePos = new List<Vector3> { new Vector3(50.0f, 300.0f, 0.0f), 
                                     new Vector3(50.0f, 530.0f, 0.0f),
@@ -36,14 +37,18 @@ public class Controller {
 		
     }
 
-    public void CalculateArea (string modelId) {
-        if(modelId == "9994") {
+    public void SetId(string modelId){
+        currId = modelId;
+    }
+
+    public void CalculateArea () {
+        if(currId == "9994") {
             currModel = new Model("9994", "Square", SquarePos);
-        } else if(modelId == "9993") {
+        } else if(currId == "9993") {
             currModel = new Model("9993", "Triangle", TrianglePos);
-        } else if(modelId == "9995") {
+        } else if(currId == "9995") {
             currModel = new Model("9995", "Pentagon", PentagonPos);
-        } else if(modelId == "9991") {
+        } else if(currId == "9991") {
             currModel = new Model("9991", "Rectangle", RectanglePos);
         } 
     }

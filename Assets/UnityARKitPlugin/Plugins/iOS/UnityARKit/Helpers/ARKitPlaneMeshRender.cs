@@ -41,7 +41,7 @@ public class ARKitPlaneMeshRender : MonoBehaviour {
             planeMesh.RecalculateBounds();
             planeMesh.RecalculateNormals();
         }
-
+				
 	}
 
 	void PrintOutMesh()

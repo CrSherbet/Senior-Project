@@ -19,6 +19,7 @@ public class ModelController : MonoBehaviour {
 				for (int i = 0; i < areaPos.Count; i++) {
 						lineRenderer.SetPosition(i, areaPos[i]);
 				}
+				Debug.Log(Controller.currModel.riceArea.center);
 				RiceModel.GetComponent<Transform>().position = Controller.currModel.riceArea.center;
 				HouseModel.GetComponent<Transform>().position = Controller.currModel.houseArea.center;
 				PondModel.GetComponent<Transform>().position = Controller.currModel.pondArea.center;
