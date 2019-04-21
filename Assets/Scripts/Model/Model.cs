@@ -94,7 +94,7 @@ public class Model {
         }
 
         if(Controller.options.house && areaPos.Count == 4 && numOfPortion == oldNumPortion){
-            portionAmount = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 10) + 10)/100;
             List<Vector3> allocatedPos = CalculateTri(remainPos, portionAmount);
             houseArea = new Area("House", allocatedPos);
             numOfPortion--;
@@ -109,17 +109,18 @@ public class Model {
             dividedPos.AddRange(houseArea.areaPos);
             dividedPos.RemoveAt(dividedPos.Count-1);
         } else {
-            houseArea = new Area("house", remainPos); 
+            houseArea = new Area("House", remainPos); 
             dividedPos.Insert(0, houseArea.areaPos[0]);
             dividedPos.AddRange(houseArea.areaPos); 
         }
-
+        
         if(Controller.options.rice) {
             riceArea = new Area("Rice", remainPos); 
             dividedPos.Insert(0, riceArea.areaPos[0]);
             dividedPos.AddRange(riceArea.areaPos);   
             dividedPos.RemoveAt(dividedPos.Count-1);         
         } 
+        
         return dividedPos;
     }
 
@@ -128,10 +129,16 @@ public class Model {
         Vector3 posB = findPointInLine(new Vector3[]{remainPos[0], remainPos[2]});    
         List<Vector3> testPoints = new List<Vector3>(){remainPos[0], posA, posB, remainPos[0]};
         Area tri = new Area("tri", testPoints);
-        float T = portionAmount/tri.getAreaSize();
-        posB.x = (1 - T) * testPoints[0].x + T * testPoints[2].x;
-        posB.y = (1 - T) * testPoints[0].y + T * testPoints[2].y;
-        testPoints[2] = new Vector3(posB.x, posB.y);
+        int count = 0;
+        while(tri.getAreaSize()/portionAmount < 0.85 || tri.getAreaSize()/portionAmount > 1.15 ) {
+            if(count == 10){ break; }
+            count++;
+            float T = portionAmount/tri.getAreaSize();
+            posB.x = (1 - T) * testPoints[0].x + T * testPoints[2].x;
+            posB.y = (1 - T) * testPoints[0].y + T * testPoints[2].y;
+            testPoints[2] = new Vector3(posB.x, posB.y);
+            tri = new Area("tri", testPoints);
+        }
         remainPos.RemoveAt(0);
         remainPos.RemoveAt(remainPos.Count-1);
         remainPos.Reverse();
@@ -159,7 +166,7 @@ public class Model {
     public Vector3 findPointInLine(Vector3[] points){
         // calculate distance between the two points
         float DT = (float) Math.Sqrt(Math.Pow((points[1].x - points[0].x), 2) + Math.Pow((points[1].y - points[0].y), 2));
-        float D = UnityEngine.Random.Range(DT/4, DT/1.8f);
+        float D = UnityEngine.Random.Range(DT/3, DT/1.8f);
        
         float x, y;
         float T = D / DT;
@@ -172,7 +179,7 @@ public class Model {
     public Vector3 findPointByArea(float portion, List<Vector3> points, Vector3 lastPoint){
         Area temp;
         float DT = (float) Math.Sqrt(Math.Pow((lastPoint.x - points[0].x), 2) + Math.Pow((lastPoint.y - points[0].y), 2));
-        float D = UnityEngine.Random.Range(0, DT/1.5f);
+        float D = UnityEngine.Random.Range(DT/6, DT/1.5f);
 
         float x, y, ratio;
         float T = D / DT;
@@ -183,11 +190,18 @@ public class Model {
         testPoints.Add(new Vector3(x, y));
         testPoints.Add(points[0]);
         temp = new Area("test", testPoints);
-        if(!(temp.getAreaSize()/portion > 0.95 && temp.getAreaSize()/portion <=1)){
+    
+        int count = 0;
+        while(!(temp.getAreaSize()/portion > 0.9 && temp.getAreaSize()/portion < 1.1 )){
+            if(count == 10){ break;}
+            count++;
             ratio = portion/temp.getAreaSize();
-            T = T*ratio;
+            if(ratio > 1){ T = (D + (D*ratio)/3)/DT;} 
+            else { T = (D - (D*ratio)/3)/DT;}
             x = (1 - T) * points[0].x + T * lastPoint.x;
             y = (1 - T) * points[0].y + T * lastPoint.y;
+            testPoints[3] = new Vector3(x, y);
+            temp = new Area("test", testPoints);
         }
         return new Vector3(x, y);      
     }

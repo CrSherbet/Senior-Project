@@ -11,11 +11,30 @@ public class Model3DController : MonoBehaviour {
     public static Quaternion originalRotationValue; 
     Transform Model3D;
 
-		void Start () {
-				RiceModel.GetComponent<Transform>().position = Controller.currModel.riceArea.center;
-				HouseModel.GetComponent<Transform>().position = Controller.currModel.houseArea.center;
-				PondModel.GetComponent<Transform>().position = Controller.currModel.pondArea.center;
-				TreeModel.GetComponent<Transform>().position = Controller.currModel.treeArea.center;
+	void Start () {
+        if(Controller.options.rice){
+            RiceModel.position = Controller.currModel.riceArea.center;
+            RiceModel.localScale = new Vector3(RiceModel.localScale.x + Controller.currModel.riceArea.scaleX, 
+            RiceModel.localScale.y, RiceModel.localScale.z + Controller.currModel.riceArea.scaleY);
+        }
+
+        if(Controller.options.house){
+            HouseModel.position = Controller.currModel.houseArea.center;
+            HouseModel.localScale = new Vector3(HouseModel.localScale.x , 
+            HouseModel.localScale.y, HouseModel.localScale.z);
+        }
+
+        if(Controller.options.pond){
+            PondModel.position = Controller.currModel.pondArea.center;
+            PondModel.localScale = new Vector3(PondModel.localScale.x + Controller.currModel.pondArea.scaleX, 
+            PondModel.localScale.y, PondModel.localScale.z + Controller.currModel.pondArea.scaleY);
+        }
+        
+        if(Controller.options.tree){
+            TreeModel.position = Controller.currModel.treeArea.center;
+            TreeModel.localScale = new Vector3(TreeModel.localScale.x + Controller.currModel.treeArea.scaleX, 
+            TreeModel.localScale.y, TreeModel.localScale.z + Controller.currModel.treeArea.scaleY);
+        }
 
     	MeshFilter mf = GetComponent<MeshFilter>();
         Mesh mesh = new Mesh();

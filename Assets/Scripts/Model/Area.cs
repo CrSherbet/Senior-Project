@@ -3,24 +3,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-class SortX : IComparer<Vector3> {
-        public int Compare(Vector3 a, Vector3 b) {
-            if (a.x == 0 || b.x == 0) { return 0; }
-            return a.x.CompareTo(b.x);
-        }
-    }
-
-    class SortY : IComparer<Vector3> {
-        public int Compare(Vector3 a, Vector3 b) {
-            if (a.y == 0 || b.y == 0) { return 0; }
-            return a.y.CompareTo(b.y);
-        }
-    }
 public class Area {
     
     public string name { get; set;}
     public float size { get; set;}
 	public Vector3 center { get; set; }
+    public float scaleX { get; set; }
+    public float scaleY { get; set; }
 	public List<Vector3> areaPos { get; set; }
 
     public Area (){
@@ -28,6 +17,8 @@ public class Area {
         areaPos = new List<Vector3>();
         center = new Vector3(0,0,0);
         size = 0.0f;
+        scaleX = 0.0f;
+        scaleY = 0.0f;
     }
 
     public Area (string inputName, List<Vector3> inputAreaPos){
@@ -35,6 +26,8 @@ public class Area {
         areaPos = inputAreaPos;
         center = getCenter();
         size = getAreaSize();
+        scaleX = findWidth();
+        scaleY = findHeight();
     }
 
     public float getAreaSize(){
@@ -87,5 +80,32 @@ public class Area {
         centerX = (maxX - minX) / 2 + minX;
         centerY = (maxY - minY) / 2 + minY;
         return new Vector3(centerX, centerY, 0.0f);
+    }
+
+    public float findWidth(){
+        float width = Math.Abs(areaPos[0].x - center.x);
+        for(int i=1; i<areaPos.Count-1; i++){
+            if(Math.Abs(areaPos[i].x - center.x) < width){
+                width = Math.Abs(areaPos[i].x - center.x);
+            }
+        }
+        if(width - 50 > 0){
+            return width - 50;
+        }
+        return width;
+    }
+
+    public float findHeight(){
+        float height = Math.Abs(areaPos[0].y - center.y);
+        for(int i=1; i<areaPos.Count-1; i++){
+            if(Math.Abs(areaPos[i].y - center.y) < height){
+                height = Math.Abs(areaPos[i].y - center.y);
+            }
+        }
+        if(height - 50 > 0){
+            return height - 50;
+        }
+        return height;
+        
     }
 }
