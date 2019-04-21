@@ -36,17 +36,31 @@ public class Model {
         if(Controller.options.pond) { areaPercent += 30; numOfPortion++; } 
         if(Controller.options.tree) { areaPercent += 30; numOfPortion++; }
         if(Controller.options.rice) { areaPercent += 30; numOfPortion++; } 
+        int oldNumPortion = numOfPortion;
         List<Vector3> dividedPos = new List<Vector3>();
 
         float rationOfPortion = (100 - areaPercent)/areaPercent;
-        List<Vector3> remainPos = new List<Vector3>(areaPos);
-        Vector3 posA, posB;
-        float portionPerc;
-        List<Vector3> newAreaPos;
+        float randPoint = UnityEngine.Random.Range(0, areaPos.Count-2);
 
-        if(Controller.options.pond && numOfPortion > 1) { 
-            portionPerc = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
-            List<Vector3> allocatedPos = CalculatePoint(remainPos, portionPerc);
+        List<Vector3> remainPos = new List<Vector3>(areaPos);
+        remainPos.RemoveAt(remainPos.Count-1);
+        for(int i=0; i<randPoint; i++){
+            remainPos.Add(remainPos[0]);
+            remainPos.RemoveAt(0);
+        }
+        remainPos.Add(remainPos[0]);
+        float portionAmount;
+
+        if(Controller.options.pond && areaPos.Count == 4 && numOfPortion == oldNumPortion){
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
+            List<Vector3> allocatedPos = CalculateTri(remainPos, portionAmount);
+            pondArea = new Area("Pond", allocatedPos);
+            numOfPortion--;
+            dividedPos.AddRange(pondArea.areaPos);
+            dividedPos.RemoveAt(dividedPos.Count-1);
+        } else if(Controller.options.pond && numOfPortion > 1) { 
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
+            List<Vector3> allocatedPos = CalculatePoint(remainPos, portionAmount);
             pondArea = new Area("Pond", allocatedPos);
             numOfPortion--;
             dividedPos.Insert(0, pondArea.areaPos[0]);
@@ -58,9 +72,16 @@ public class Model {
             dividedPos.AddRange(pondArea.areaPos); 
         }       
 
-        if(Controller.options.tree && numOfPortion > 1) {
-            portionPerc = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
-            List<Vector3> allocatedPos = CalculatePoint(remainPos, portionPerc);
+        if(Controller.options.tree && areaPos.Count == 4 && numOfPortion == oldNumPortion){
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
+            List<Vector3> allocatedPos = CalculateTri(remainPos, portionAmount);
+            treeArea = new Area("Tree", allocatedPos);
+            numOfPortion--;
+            dividedPos.AddRange(treeArea.areaPos);
+            dividedPos.RemoveAt(dividedPos.Count-1);
+        } else if(Controller.options.tree && numOfPortion > 1) {
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
+            List<Vector3> allocatedPos = CalculatePoint(remainPos, portionAmount);
             treeArea = new Area("Tree", allocatedPos);
             numOfPortion--;
             dividedPos.Insert(0, treeArea.areaPos[0]);
@@ -72,9 +93,16 @@ public class Model {
             dividedPos.AddRange(treeArea.areaPos); 
         }
 
-        if(Controller.options.house && numOfPortion > 1){
-            portionPerc = area.getAreaSize() * ((rationOfPortion * 10) + 10)/100;
-            List<Vector3> allocatedPos = CalculatePoint(remainPos, portionPerc);
+        if(Controller.options.house && areaPos.Count == 4 && numOfPortion == oldNumPortion){
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 30) + 30)/100;
+            List<Vector3> allocatedPos = CalculateTri(remainPos, portionAmount);
+            houseArea = new Area("House", allocatedPos);
+            numOfPortion--;
+            dividedPos.AddRange(houseArea.areaPos);
+            dividedPos.RemoveAt(dividedPos.Count-1);
+        } else if(Controller.options.house && numOfPortion > 1){
+            portionAmount = area.getAreaSize() * ((rationOfPortion * 10) + 10)/100;
+            List<Vector3> allocatedPos = CalculatePoint(remainPos, portionAmount);
             houseArea = new Area("House", allocatedPos);
             numOfPortion--;
             dividedPos.Insert(0, houseArea.areaPos[0]);
@@ -89,15 +117,34 @@ public class Model {
         if(Controller.options.rice) {
             riceArea = new Area("Rice", remainPos); 
             dividedPos.Insert(0, riceArea.areaPos[0]);
-            dividedPos.AddRange(riceArea.areaPos);            
-        }
+            dividedPos.AddRange(riceArea.areaPos);   
+            dividedPos.RemoveAt(dividedPos.Count-1);         
+        } 
         return dividedPos;
     }
 
-    public List<Vector3> CalculatePoint(List<Vector3> remainPos, float portionPerc){
+    public List<Vector3> CalculateTri(List<Vector3> remainPos, float portionAmount){
+        Vector3 posA = findPointInLine(new Vector3[]{remainPos[0], remainPos[1]});
+        Vector3 posB = findPointInLine(new Vector3[]{remainPos[0], remainPos[2]});    
+        List<Vector3> testPoints = new List<Vector3>(){remainPos[0], posA, posB, remainPos[0]};
+        Area tri = new Area("tri", testPoints);
+        float T = portionAmount/tri.getAreaSize();
+        posB.x = (1 - T) * testPoints[0].x + T * testPoints[2].x;
+        posB.y = (1 - T) * testPoints[0].y + T * testPoints[2].y;
+        testPoints[2] = new Vector3(posB.x, posB.y);
+        remainPos.RemoveAt(0);
+        remainPos.RemoveAt(remainPos.Count-1);
+        remainPos.Reverse();
+        remainPos.Insert(0, posB);
+        remainPos.Add(posA);
+        remainPos.Add(posB);
+        return testPoints;
+    }
+
+    public List<Vector3> CalculatePoint(List<Vector3> remainPos, float portionAmount){
         Vector3 posA = findPointInLine(new Vector3[]{remainPos[1], remainPos[2]});            
         List<Vector3> newAreaPos = new List<Vector3>(){remainPos[0], remainPos[1], posA}; 
-        Vector3 posB = findPointByArea(portionPerc, newAreaPos, remainPos[remainPos.Count -2]);
+        Vector3 posB = findPointByArea(portionAmount, newAreaPos, remainPos[remainPos.Count -2]);
         remainPos.RemoveRange(0, 2);
         remainPos.RemoveAt(remainPos.Count-1);
         remainPos.Reverse();
@@ -136,13 +183,11 @@ public class Model {
         testPoints.Add(new Vector3(x, y));
         testPoints.Add(points[0]);
         temp = new Area("test", testPoints);
-        while (!(temp.getAreaSize()/portion > 0.95 && temp.getAreaSize()/portion <= 1)){
+        if(!(temp.getAreaSize()/portion > 0.95 && temp.getAreaSize()/portion <=1)){
             ratio = portion/temp.getAreaSize();
             T = T*ratio;
             x = (1 - T) * points[0].x + T * lastPoint.x;
             y = (1 - T) * points[0].y + T * lastPoint.y;
-            testPoints[testPoints.Count-2] = new Vector3(x, y);
-            temp = new Area("test", testPoints);
         }
         return new Vector3(x, y);      
     }

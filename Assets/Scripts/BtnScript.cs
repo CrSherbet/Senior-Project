@@ -36,7 +36,6 @@ public class BtnScript : MonoBehaviour {
 
     public void DestroyTutorial(GameObject tutorial){
         OpenTime++;
-        print(OpenTime);
         if(OpenTime>2){
             Destroy(tutorial);
         }
