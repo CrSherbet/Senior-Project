@@ -3,13 +3,26 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+class SortX : IComparer<Vector3> {
+        public int Compare(Vector3 a, Vector3 b) {
+            if (a.x == 0 || b.x == 0) { return 0; }
+            return a.x.CompareTo(b.x);
+        }
+    }
+
+    class SortY : IComparer<Vector3> {
+        public int Compare(Vector3 a, Vector3 b) {
+            if (a.y == 0 || b.y == 0) { return 0; }
+            return a.y.CompareTo(b.y);
+        }
+    }
 public class Area {
     
     public string name { get; set;}
     public float size { get; set;}
 	public Vector3 center { get; set; }
 	public List<Vector3> areaPos { get; set; }
-  
+
     public Area (){
         name = "Default Name";
         areaPos = new List<Vector3>();
@@ -53,9 +66,9 @@ public class Area {
     // find center of polygon
     public Vector3 getCenter() {
         float maxX = areaPos[0].x, maxY = areaPos[0].y;
-        float minX = areaPos[0].x, minY = areaPos[0].y; 
+        float minX = areaPos[0].x, minY = areaPos[0].y;
         float centerX = 0.0f, centerY = 0.0f;
-        
+
         for(int i = 0; i < areaPos.Count; i++) {
             if(areaPos[i].x > maxX) {
                 maxX = areaPos[i].x;

@@ -120,7 +120,7 @@ public class Model {
             dividedPos.AddRange(riceArea.areaPos);   
             dividedPos.RemoveAt(dividedPos.Count-1);         
         } 
-        return dividedPos;
+        return dividedAreaPos;
     }
 
     public List<Vector3> CalculateTri(List<Vector3> remainPos, float portionAmount){
@@ -152,7 +152,7 @@ public class Model {
         remainPos.Add(posA);
         remainPos.Add(posB);
         newAreaPos.Add(posB);
-        newAreaPos.Add(remainPos[0]);
+        newAreaPos.Add(newAreaPos[0]);
         return newAreaPos;
     }
 

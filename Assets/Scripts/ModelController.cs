@@ -30,7 +30,9 @@ public class ModelController : MonoBehaviour {
 				}
 				if(Controller.options.tree){
 						TreeModel.GetComponent<Transform>().position = Controller.currModel.treeArea.center;
-				}	
+				}
+				GameObject.Find("TextArea").GetComponent<Transform>().localScale = new Vector3(3, 3, 3);
+				GameObject.Find("TextArea").GetComponent<Transform>().localPosition = new Vector3(-667, 650, 0);
 		}
 		
 		void Update () {
