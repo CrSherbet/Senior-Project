@@ -33,7 +33,7 @@ public class Model3DController : MonoBehaviour {
         if(Controller.options.tree){
             TreeModel.position = Controller.currModel.treeArea.center;
             TreeModel.localScale = new Vector3(TreeModel.localScale.x + Controller.currModel.treeArea.scaleX, 
-            TreeModel.localScale.y, TreeModel.localScale.z + Controller.currModel.treeArea.scaleY);
+            TreeModel.localScale.y, TreeModel.localScale.z + Controller.currModel.treeArea.scaleX);
         }
 
     	MeshFilter mf = GetComponent<MeshFilter>();
