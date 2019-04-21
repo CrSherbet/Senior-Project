@@ -120,7 +120,7 @@ public class Model {
             dividedPos.AddRange(riceArea.areaPos);   
             dividedPos.RemoveAt(dividedPos.Count-1);         
         } 
-        return dividedAreaPos;
+        return dividedPos;
     }
 
     public List<Vector3> CalculateTri(List<Vector3> remainPos, float portionAmount){
@@ -159,7 +159,7 @@ public class Model {
     public Vector3 findPointInLine(Vector3[] points){
         // calculate distance between the two points
         float DT = (float) Math.Sqrt(Math.Pow((points[1].x - points[0].x), 2) + Math.Pow((points[1].y - points[0].y), 2));
-        float D = UnityEngine.Random.Range(DT/3, DT/2);
+        float D = UnityEngine.Random.Range(DT/4, DT/1.8f);
        
         float x, y;
         float T = D / DT;
@@ -172,7 +172,7 @@ public class Model {
     public Vector3 findPointByArea(float portion, List<Vector3> points, Vector3 lastPoint){
         Area temp;
         float DT = (float) Math.Sqrt(Math.Pow((lastPoint.x - points[0].x), 2) + Math.Pow((lastPoint.y - points[0].y), 2));
-        float D = UnityEngine.Random.Range(0, DT);
+        float D = UnityEngine.Random.Range(0, DT/1.5f);
 
         float x, y, ratio;
         float T = D / DT;
