@@ -18,6 +18,6 @@ public class CameraBtnScript : MonoBehaviour {
     }
 
     public void SetPosition(){
-
+       PointCloudParticleExample.PointUpdated = true;
     }
 }
