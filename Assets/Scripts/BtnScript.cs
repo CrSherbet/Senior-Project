@@ -31,6 +31,10 @@ public class BtnScript : MonoBehaviour {
     public void LoadScene(string sceneName) {
         OpenTime++;
         SceneManager.LoadScene(sceneName);
+        if(SceneManager.GetActiveScene().name == "ModelScene"){
+            File.Delete(Application.persistentDataPath + "/Blueprint.png");
+            File.Delete(Application.persistentDataPath + "/3DBlueprint.png");
+        }
     }
 
     public void SetCurrId(string ModelId){
