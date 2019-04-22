@@ -19,6 +19,9 @@ public class BtnScript : MonoBehaviour {
             Destroy(GameObject.Find("Tutorial"));
         }
         MainControl = new Controller(); 
+        if(SceneManager.GetActiveScene().name == "ModelScene"){
+            ScreenCapture.CaptureScreenshot("Blueprint.png", 0);
+        }
     }
 
     void Update() {
@@ -55,6 +58,7 @@ public class BtnScript : MonoBehaviour {
 
     public void SetUp3DModel(Transform model){
         model.GetComponent<Transform>().rotation = Model3DController.originalRotationValue;
+        ScreenCapture.CaptureScreenshot("3DBlueprint.png", 0);
     }
 
     public void ExportPDF(GameObject Saved){
@@ -86,6 +90,13 @@ public class BtnScript : MonoBehaviour {
         riceImg.ScaleAbsolute(250f, 170f);
         riceImg.Alignment = Element.ALIGN_CENTER;
 
+        iTextSharp.text.Image blueprintImg = iTextSharp.text.Image.GetInstance(Application.persistentDataPath + "/Blueprint.png");
+        blueprintImg.Alignment = Element.ALIGN_CENTER;
+
+
+        iTextSharp.text.Image blueprint3DImg = iTextSharp.text.Image.GetInstance(Application.persistentDataPath + "/3DBlueprint.png");
+        blueprint3DImg.Alignment = Element.ALIGN_CENTER;
+
         FileStream fs = new FileStream("ARFarm_Result.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
         Document doc = new Document();
         try {
@@ -95,10 +106,12 @@ public class BtnScript : MonoBehaviour {
         }
         doc.Open();
         Paragraph header = new Paragraph("Result of Analyzation", headerFont);       
-        Paragraph TextUnder3D = new Paragraph("3D Model or Screen Shot");
-        TextUnder3D.Alignment = Element.ALIGN_CENTER;
+        doc.Add(blueprintImg);
         Paragraph TextUnderBlueprint = new Paragraph("Allocated Blueprint");
         TextUnderBlueprint.Alignment = Element.ALIGN_CENTER;
+        Paragraph TextUnder3D = new Paragraph("3D Model or Screen Shot");
+        TextUnder3D.Alignment = Element.ALIGN_CENTER;
+        doc.Add(blueprint3DImg);
         Paragraph sugg = new Paragraph("Suggestion\n", suggFont);
         doc.Add(header);
         doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("dddd, dd MMMM yyyy") + "\nTime: " + DateTime.Now.ToString("HH:mm tt")));
