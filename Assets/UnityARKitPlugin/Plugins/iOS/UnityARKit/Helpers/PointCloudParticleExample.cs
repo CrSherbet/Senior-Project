@@ -67,6 +67,8 @@ public class PointCloudParticleExample : MonoBehaviour
                 currentPS.SetParticles (particles, numParticles);
                 int idx = 0;
                 if(PointUpdated){
+                    Point += numParticles+ "______num____\n";
+                    Point += drawingPoint.Length+ "___draw_____\n";
                     int num = numParticles ;
                     Vector3[] keep = new Vector3[numParticles];
                     foreach (Vector3 cur in drawingPoint)
@@ -77,6 +79,7 @@ public class PointCloudParticleExample : MonoBehaviour
                                 }
                             }
                     int j = 0;
+                    int cc = 0;
                     foreach (Vector3 curr in keep)
                             {
                                 if(j == 0)
@@ -85,13 +88,16 @@ public class PointCloudParticleExample : MonoBehaviour
                                 }else{
                                     for(int w=0 ; w < parts.Count ; w++)
                                         {
-                                            if(Math.Abs(curr.x-parts[w].x) > 0.02f && Math.Abs(curr.y-parts[w].y) > 0.02f){
+                                            if(Math.Abs(curr.x-parts[w].x) > 0.02 && Math.Abs(curr.z-parts[w].z) > 0.02){
                                                parts.Add(curr);
+                                               cc++ ;
                                             }
                                         }
                                 }
                                 j++;
                             }
+                            Point += cc+ "____loop____";
+                            Point += parts.Count + ":___Parts_____\n";
                 foreach (Vector3 i in parts){
                      Point += i.ToString("F4") + "\n";
                 }
