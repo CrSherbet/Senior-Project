@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
 public class Model3DController : MonoBehaviour {
 
     public Transform RiceModel;
@@ -77,11 +78,16 @@ public class Model3DController : MonoBehaviour {
             mesh.uv = uv;
         }
 
-        Model3D = GameObject.Find("Group3DBP").GetComponent<Transform>();
-        Model3D.localPosition = new Vector3(-318f, -185f, -107f);
-        Model3D.Rotate(50f, 0f, 45f);
-        Model3D.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        originalRotationValue = Model3D.rotation;
+        if(SceneManager.GetActiveScene().name != "ArScene"){
+            Model3D = GameObject.Find("Group3DBP").GetComponent<Transform>();
+            Model3D.localPosition = new Vector3(-318f, -185f, -107f);
+            Model3D.Rotate(50f, 0f, 45f);
+            Model3D.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            originalRotationValue = Model3D.rotation;
+        } else {
+            Model3D = GameObject.Find("Group3DBP").GetComponent<Transform>();
+            Model3D.localPosition = new Vector3(1881,2630,0);
+        }
     }
 		
 	void Update () {

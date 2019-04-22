@@ -28,6 +28,12 @@ public class BtnScript : MonoBehaviour {
     void Update() {
     
     }
+
+    public void SetPosition(GameObject model){
+       PointCloudParticleExample.PointUpdated = true;
+       MainControl.CreateARModel(PointCloudParticleExample.parts);
+       model.SetActive(true);
+    }
     
     public void CapScreenAfterTutorial(string btnName){
         if(btnName == "3D"){

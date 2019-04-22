@@ -14,8 +14,7 @@ public class PointCloudParticleExample : MonoBehaviour
     public static bool PointUpdated = false;
     public float particleSize = 1.0f;
     Vector3[] m_PointCloudData;
-
-
+    public static List<Vector3> parts = new List<Vector3>();
     bool frameUpdated = false;
     ParticleSystem currentPS;
     ParticleSystem.Particle [] particles;
@@ -48,7 +47,6 @@ public class PointCloudParticleExample : MonoBehaviour
     {
         // if (frameUpdated)
         // {
-            List<Vector3> parts = new List<Vector3>();
             if (m_PointCloudData != null && m_PointCloudData.Length > 0 && maxPointsToShow > 0)
             {
                 int numParticles = Mathf.Min (m_PointCloudData.Length, maxPointsToShow);
@@ -82,16 +80,23 @@ public class PointCloudParticleExample : MonoBehaviour
                     int cc = 0;
                     foreach (Vector3 curr in keep)
                             {
+                                bool isDiffPoint = false;
                                 if(j == 0)
                                 {
                                     parts.Add(curr);
                                 }else{
                                     for(int w=0 ; w < parts.Count ; w++)
                                         {
-                                            if(Math.Abs(curr.x-parts[w].x) > 0.02 && Math.Abs(curr.z-parts[w].z) > 0.02){
-                                               parts.Add(curr);
+                                            if(Math.Abs(curr.x-parts[w].x) > 0.02 || Math.Abs(curr.z-parts[w].z) > 0.02){
+                                               isDiffPoint = true;
                                                cc++ ;
+                                            } else {
+                                                isDiffPoint = false;
+                                                break;
                                             }
+                                        }
+                                        if(isDiffPoint){
+                                            parts.Add(curr);
                                         }
                                 }
                                 j++;

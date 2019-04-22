@@ -41,6 +41,12 @@ public class Controller {
         currId = modelId;
     }
 
+    public void CreateARModel(List<Vector3> detectedPoint){
+        detectedPoint = new List<Vector3>(SquarePos);
+        currId =  "0000";
+        currModel = new Model("0000", "AR", SquarePos);
+    }
+
     public void CalculateArea () {
         if(currId == "9994") {
             currModel = new Model("9994", "Square", SquarePos);
@@ -50,7 +56,7 @@ public class Controller {
             currModel = new Model("9995", "Pentagon", PentagonPos);
         } else if(currId == "9991") {
             currModel = new Model("9991", "Rectangle", RectanglePos);
-        } 
+        }
     }
 
 }
