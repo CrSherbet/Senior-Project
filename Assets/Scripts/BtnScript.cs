@@ -20,7 +20,8 @@ public class BtnScript : MonoBehaviour {
         }
         MainControl = new Controller(); 
         if(SceneManager.GetActiveScene().name == "ModelScene"){
-            ScreenCapture.CaptureScreenshot("Blueprint.png", 0);
+            StartCoroutine(CaptureScreen("Blueprint.png"));
+            Model3DController.originalRotationValue = new Quaternion(0f, 0f, 0f, 0f);
         }
     }
 
@@ -28,12 +29,22 @@ public class BtnScript : MonoBehaviour {
     
     }
 
+    IEnumerator CaptureScreen(string filename) {
+        ScreenCapture.CaptureScreenshot(filename, 0);
+        yield return null;
+    }
+
+    IEnumerator ClearImgFile() {
+        File.Delete(Application.persistentDataPath + "/Blueprint.png");
+        File.Delete(Application.persistentDataPath + "/3DBlueprint.png");
+        yield return null;
+    }
+
     public void LoadScene(string sceneName) {
         OpenTime++;
         SceneManager.LoadScene(sceneName);
         if(SceneManager.GetActiveScene().name == "ModelScene"){
-            File.Delete(Application.persistentDataPath + "/Blueprint.png");
-            File.Delete(Application.persistentDataPath + "/3DBlueprint.png");
+            StartCoroutine(ClearImgFile());
         }
     }
 
@@ -62,7 +73,7 @@ public class BtnScript : MonoBehaviour {
 
     public void SetUp3DModel(Transform model){
         model.GetComponent<Transform>().rotation = Model3DController.originalRotationValue;
-        ScreenCapture.CaptureScreenshot("3DBlueprint.png", 0);
+        StartCoroutine(CaptureScreen("3DBlueprint.png"));
     }
 
     public void ExportPDF(GameObject Saved){
