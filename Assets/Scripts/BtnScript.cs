@@ -28,28 +28,35 @@ public class BtnScript : MonoBehaviour {
     void Update() {
     
     }
-
-    IEnumerator CaptureScreen(string filename) {
-        ScreenCapture.CaptureScreenshot(filename, 0);
-        yield return null;
-    }
-
-    IEnumerator ClearImgFile() {
-        File.Delete(Application.persistentDataPath + "/Blueprint.png");
-        File.Delete(Application.persistentDataPath + "/3DBlueprint.png");
-        yield return null;
-    }
-
-    public void LoadScene(string sceneName) {
-        OpenTime++;
-        SceneManager.LoadScene(sceneName);
-        if(SceneManager.GetActiveScene().name == "ModelScene"){
-            StartCoroutine(ClearImgFile());
+    
+    public void CapScreenAfterTutorial(string btnName){
+        if(btnName == "3D"){
+            StartCoroutine(CaptureScreen("3DBlueprint.png"));
+            Destroy(GameObject.Find("Tutorial2"));
+        } else {
+            StartCoroutine(CaptureScreen("Blueprint.png"));
+            Destroy(GameObject.Find("Tutorial"));
         }
     }
 
-    public void SetCurrId(string ModelId){
-        MainControl.SetId(ModelId); 
+    IEnumerator CaptureScreen(string filename) {
+        yield return new WaitForEndOfFrame();
+        int width = 850;
+        int height = 850;
+        Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
+        tex.ReadPixels(new Rect(110, 815 , width, height), 0, 0);
+        tex.Apply();
+        byte[] bytes = tex.EncodeToPNG();
+        Destroy(tex);
+        File.WriteAllBytes(Application.streamingAssetsPath + "/FileforPDF/" + filename, bytes);
+    }
+
+    IEnumerator ClearFile() {
+        if(File.Exists(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png")){
+            File.Delete(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png");
+        }
+        
+        yield return null;
     }
 
     public void DestroyTutorial(GameObject tutorial){
@@ -57,6 +64,18 @@ public class BtnScript : MonoBehaviour {
         if(OpenTime>2){
             Destroy(tutorial);
         }
+    }
+
+    public void LoadScene(string sceneName) {
+        OpenTime++;
+        if(sceneName == "ModelScene"){
+            StartCoroutine(ClearFile());
+        }
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void SetCurrId(string ModelId){
+        MainControl.SetId(ModelId); 
     }
 
     public void ChangeModel() {
@@ -92,25 +111,26 @@ public class BtnScript : MonoBehaviour {
         iTextSharp.text.Font headerFont = new iTextSharp.text.Font(bf, 20, 0, new iTextSharp.text.BaseColor(178, 34, 34));
         iTextSharp.text.Font suggFont = new iTextSharp.text.Font(bf, 18, 0);
         Chunk linebreak = new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, new iTextSharp.text.BaseColor(0,0,0) , Element.ALIGN_CENTER, -1));
-        iTextSharp.text.Image houseImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/ImgforPDF/House.png");
+        iTextSharp.text.Image houseImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/House.png");
         houseImg.ScaleAbsolute(250f, 170f);
         houseImg.Alignment = Element.ALIGN_CENTER;
-        iTextSharp.text.Image pondImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/ImgforPDF/Pond.png");
+        iTextSharp.text.Image pondImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/Pond.png");
         pondImg.ScaleAbsolute(250f, 170f);
         pondImg.Alignment = Element.ALIGN_CENTER;
-        iTextSharp.text.Image treeImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/ImgforPDF/Tree.png");
+        iTextSharp.text.Image treeImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/Tree.png");
         treeImg.ScaleAbsolute(250f, 170f);
         treeImg.Alignment = Element.ALIGN_CENTER;
-        iTextSharp.text.Image riceImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/ImgforPDF/Rice.png");
+        iTextSharp.text.Image riceImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/Rice.png");
         riceImg.ScaleAbsolute(250f, 170f);
         riceImg.Alignment = Element.ALIGN_CENTER;
 
-        iTextSharp.text.Image blueprintImg = iTextSharp.text.Image.GetInstance(Application.persistentDataPath + "/Blueprint.png");
+        iTextSharp.text.Image blueprintImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/Blueprint.png");
         blueprintImg.Alignment = Element.ALIGN_CENTER;
+        blueprintImg.ScaleAbsolute(170f, 170f);
 
-
-        iTextSharp.text.Image blueprint3DImg = iTextSharp.text.Image.GetInstance(Application.persistentDataPath + "/3DBlueprint.png");
+        iTextSharp.text.Image blueprint3DImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png");
         blueprint3DImg.Alignment = Element.ALIGN_CENTER;
+        blueprint3DImg.ScaleAbsolute(170f, 170f);
 
         FileStream fs = new FileStream("ARFarm_Result.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
         Document doc = new Document();
@@ -119,20 +139,22 @@ public class BtnScript : MonoBehaviour {
         } catch(System.Exception e){
             Debug.Log(e);
         }
-        doc.Open();
+        
         Paragraph header = new Paragraph("Result of Analyzation", headerFont);       
-        doc.Add(blueprintImg);
-        Paragraph TextUnderBlueprint = new Paragraph("Allocated Blueprint");
+        Paragraph TextUnderBlueprint = new Paragraph("\nAllocated Blueprint\n");
         TextUnderBlueprint.Alignment = Element.ALIGN_CENTER;
-        Paragraph TextUnder3D = new Paragraph("3D Model or Screen Shot");
+        Paragraph TextUnder3D = new Paragraph("\n3D Model or Screen Shot");
         TextUnder3D.Alignment = Element.ALIGN_CENTER;
-        doc.Add(blueprint3DImg);
         Paragraph sugg = new Paragraph("Suggestion\n", suggFont);
+       
+        doc.Open();
         doc.Add(header);
         doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("dddd, dd MMMM yyyy") + "\nTime: " + DateTime.Now.ToString("HH:mm tt")));
         doc.Add(linebreak);
-        doc.Add(TextUnder3D);
         doc.Add(TextUnderBlueprint);
+        doc.Add(blueprintImg);
+        doc.Add(TextUnder3D);
+        doc.Add(blueprint3DImg);
         doc.Add(sugg);
         doc.Add(new Paragraph("\nHouse"));
         doc.Add(houseImg);
@@ -158,7 +180,7 @@ public class BtnScript : MonoBehaviour {
         EndText.Alignment = Element.ALIGN_CENTER;  
         doc.Add(EndText);
         doc.Close();
-        yield return null;
+        yield return new WaitForEndOfFrame();
     }
 }
         
