@@ -43,8 +43,16 @@ public class BtnScript : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         int width = 850;
         int height = 850;
+        if(filename == "AR.png"){
+            width = Screen.width;
+            height = Screen.height;
+        }
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
-        tex.ReadPixels(new Rect(110, 815 , width, height), 0, 0);
+        if(filename == "AR.png"){
+            tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        } else {
+            tex.ReadPixels(new Rect(110, 815, width, height), 0, 0);
+        }
         tex.Apply();
         byte[] bytes = tex.EncodeToPNG();
         Destroy(tex);
@@ -96,6 +104,9 @@ public class BtnScript : MonoBehaviour {
     }
 
     public void ExportPDF(GameObject Saved){
+        if(SceneManager.GetActiveScene().name == "ArScene"){
+            StartCoroutine(CaptureScreen("AR.png"));
+        }
         StartCoroutine(CreatePDF());
         new NativeShare().AddFile(Application.streamingAssetsPath + "/ARFarm_Result.pdf").Share();
         Saved.SetActive(true);
@@ -127,10 +138,19 @@ public class BtnScript : MonoBehaviour {
         iTextSharp.text.Image blueprintImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/Blueprint.png");
         blueprintImg.Alignment = Element.ALIGN_CENTER;
         blueprintImg.ScaleAbsolute(170f, 170f);
+        iTextSharp.text.Image blueprint3DImg = blueprintImg;
+        if(File.Exists(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png")){    
+            blueprint3DImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png");
+            blueprint3DImg.Alignment = Element.ALIGN_CENTER;
+            blueprint3DImg.ScaleAbsolute(170f, 170f);
+        }
 
-        iTextSharp.text.Image blueprint3DImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png");
-        blueprint3DImg.Alignment = Element.ALIGN_CENTER;
-        blueprint3DImg.ScaleAbsolute(170f, 170f);
+        iTextSharp.text.Image ARImg = blueprintImg;
+        if(File.Exists(Application.streamingAssetsPath + "/FileforPDF/AR.png")){    
+            ARImg = iTextSharp.text.Image.GetInstance(Application.streamingAssetsPath + "/FileforPDF/AR.png");
+            ARImg.Alignment = Element.ALIGN_CENTER;
+            ARImg.ScaleAbsolute(170f, 302f);
+        }
 
         FileStream fs = new FileStream("ARFarm_Result.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
         Document doc = new Document();
@@ -145,16 +165,25 @@ public class BtnScript : MonoBehaviour {
         TextUnderBlueprint.Alignment = Element.ALIGN_CENTER;
         Paragraph TextUnder3D = new Paragraph("\n3D Model or Screen Shot");
         TextUnder3D.Alignment = Element.ALIGN_CENTER;
+        Paragraph TextUnderAR = new Paragraph("\nScreen Shot");
+        TextUnder3D.Alignment = Element.ALIGN_CENTER;
         Paragraph sugg = new Paragraph("Suggestion\n", suggFont);
        
         doc.Open();
         doc.Add(header);
         doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("dddd, dd MMMM yyyy") + "\nTime: " + DateTime.Now.ToString("HH:mm tt")));
         doc.Add(linebreak);
-        doc.Add(TextUnderBlueprint);
-        doc.Add(blueprintImg);
-        doc.Add(TextUnder3D);
-        doc.Add(blueprint3DImg);
+        if(SceneManager.GetActiveScene().name == "ModelScene"){
+            doc.Add(TextUnderBlueprint);
+            doc.Add(blueprintImg);
+            if(File.Exists(Application.streamingAssetsPath + "/FileforPDF/3DBlueprint.png")){    
+                doc.Add(TextUnder3D);
+                doc.Add(blueprint3DImg);
+            }
+        } else {
+            doc.Add(TextUnderAR);
+            doc.Add(ARImg);
+        }
         doc.Add(sugg);
         doc.Add(new Paragraph("\nHouse"));
         doc.Add(houseImg);
